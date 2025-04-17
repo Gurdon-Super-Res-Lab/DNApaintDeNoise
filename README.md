@@ -10,8 +10,11 @@ Download or clone this repository to a single folder on your computer. Download 
 
 3. Demo:
 Open MATLAB and navigate to the folder with the MATLAB scripts and the example data.
+
 In the Command Window type 'run("ExampleCode.m")'.
+
 When the script finishes running, a figure will appear with two scatter plots showing the raw and denoised point cloud data.
+
 Typical run time for a demo on a normal computer is ~3 min.
 
 5. Instructions for use:
