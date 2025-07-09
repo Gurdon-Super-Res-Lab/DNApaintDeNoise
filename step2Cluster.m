@@ -1,4 +1,4 @@
-function gIdx = step2Cluster(X, Y, eps, dbIdx)
+function [gIdx, silh] = step2Cluster(X, Y, eps, dbIdx)
 % This function performs a second layer of clustering based on k-means and
 % morhological features of the DBSCAN clusters
 
@@ -10,6 +10,7 @@ function gIdx = step2Cluster(X, Y, eps, dbIdx)
 
 % OUTPUT
 % gIdx: global unique index for all blinks after the 2nd clustering
+% silh: silhoutte score
 
 % ensure that the array sizes match
 if size(X, 1) == size(dbIdx, 1)
@@ -26,6 +27,9 @@ if size(X, 1) == size(dbIdx, 1)
     % set the zoom for cluster image reconstruction
     theZoom = 10;
     
+    % initalize silhoutte score
+    silh = nan(max(dbIdx), 1);
+
     % loop over each DBSCAN cluster index
     for i = 1:max(dbIdx)   
 
@@ -97,6 +101,12 @@ if size(X, 1) == size(dbIdx, 1)
 
             % update global unique index
             gIdx(sIdx) = max(gIdx) + tmpIdx;
+
+            % calculate silhouette score for each (x, y) point
+            tempSil = silhouette([X(sIdx), Y(sIdx)], tmpIdx);
+
+            % store the mean silhouette score
+            silh(i, 1) = mean(tempSil);
 
 
         catch

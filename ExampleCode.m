@@ -55,7 +55,7 @@ fprintf(1, 'DONE\n');
 % cluster) and passes that to the k-means clustering function. This
 % partitions each db-cluster into single molecule sized sub-clusters.
 fprintf(1, 'Running second level clustering...');
-gIdx = step2Cluster(X, Y, E, dbIdx);
+[gIdx, silh] = step2Cluster(X, Y, E, dbIdx);
 fprintf(1, 'DONE\n');
 
 %% link the blinks and do the Anderson-Darling Test
